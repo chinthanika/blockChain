@@ -17,6 +17,8 @@ struct data {
   
     string certification;    //The quality certification of the product
    
+    string comments;    //Any additional comments from the seller about the product
+    
     bool accepted;    //Whether the product has been accepted by the business
 };
 
@@ -27,7 +29,7 @@ public:
 
     Block(const data information, string prev, uint32_t i);    //Constructor
 
-    string getCurrHash();    //Getter for the current block's hash
+    string getHash();    //Getter for the current block's hash
 
 private:
 

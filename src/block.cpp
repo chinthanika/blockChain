@@ -11,7 +11,7 @@ Block :: Block (data information, string prev, uint32_t i) {
     currHash = calculateHash();
 }
 
-string Block :: getCurrHash() {
+string Block :: getHash() {
     return currHash;
 }
 
