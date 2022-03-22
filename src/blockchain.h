@@ -9,14 +9,14 @@ using namespace std;
 
 class Blockchain {
 public:
-    Blockchain();
+    Blockchain ();
 
-    void addBlock(Block newBlock);
+    void addBlock(data newData);
 
 private:
     vector<Block> chain;
 
-    Block getLastBlock() const;
+    Block getLastBlock () const;
 };
 
 #endif

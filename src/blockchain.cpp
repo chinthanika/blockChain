@@ -1,11 +1,13 @@
 #include "Blockchain.h"
 
-Blockchain::Blockchain() {
+Blockchain::Blockchain () {
     data info;
 
-    info.bizID = "NULL";
+    info.bizName = "NULL";
     info.bizType = "NULL";
     info.prodCode = "NULL";
+    info.prodType = "NULL";
+    info.prodPurity = "NULL";
     info.certification = "NULL";
     info.comments = "This is the Genesis Block";
     info.accepted = NULL;
@@ -13,11 +15,17 @@ Blockchain::Blockchain() {
     chain.emplace_back(Block (info, NULL, 0));
 }
 
-void Blockchain ::addBlock (Block newBlock) {
-    newBlock.prevHash = getLastBlock().getHash();
+void Blockchain ::addBlock (data newData) {
+
+    Block newBlock = Block (
+        newData, 
+        getLastBlock().getHash(), 
+        getLastBlock().getIndex() + 1
+    );
+
     chain.push_back (newBlock);
 }
 
-Block Blockchain :: getLastBlock() const {
+Block Blockchain :: getLastBlock () const {
     return chain.back();
 }

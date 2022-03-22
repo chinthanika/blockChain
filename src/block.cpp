@@ -2,27 +2,54 @@
 #include "sha256.h"
 #include <cstdlib>
 #include <time.h>
+#include <sstream>
 
 Block :: Block (data information, string prev, uint32_t i) {
     timeStamp = time(NULL);
-    index = i;
     info = information;
     prevHash = prev;
-    currHash = calculateHash();
+    index = i;
+    currHash = calculateHash ();
 }
 
-string Block :: getHash() {
+inline string Block::calculateHash () const {
+    stringstream hashString;
+    hashString <<
+        index <<
+        prevHash <<
+        currHash <<
+        timeStamp <<
+        info.bizName <<
+        info.bizType <<
+        info.certification <<
+        info.prodCode <<
+        info.prodType <<
+        info.prodPurity;
+
+    return sha256(hashString.str());
+}
+
+string Block :: getHash () {
     return currHash;
 }
 
-inline string Block::calculateHash() const {
-    string hashString;
-    hashString = info.bizID + info.bizType + info.certification + info.prodCode;
+string Block :: getInfo () {
+    stringstream infoString;
+    infoString <<
+        index << " | " <<
+        prevHash << " | " <<
+        currHash << " | " <<
+        timeStamp << " |\n" <<
+        info.bizName << " | " <<
+        info.bizType << " | " <<
+        info.certification << " | " <<
+        info.prodCode << " | " <<
+        info.prodType << " | " <<
+        info.prodPurity << " |";
 
-    return sha256(hashString);
+    return (infoString.str());
 }
 
-Block::~Block()
-{
-    //dtor
+uint32_t Block :: getIndex () {
+    return index;
 }
