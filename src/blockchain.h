@@ -11,7 +11,11 @@ class Blockchain {
 public:
     Blockchain ();
 
-    void addBlock(data newData);
+    void addBlock (record newRecord);
+
+    size_t chainSize () const; 
+
+    void printBlocks ();
 
 private:
     vector<Block> chain;

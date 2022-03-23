@@ -4,7 +4,7 @@
 #include <time.h>
 #include <sstream>
 
-Block :: Block (data information, string prev, uint32_t i) {
+Block :: Block (record information, string prev, uint32_t i) {
     timeStamp = time(NULL);
     info = information;
     prevHash = prev;
@@ -29,23 +29,25 @@ inline string Block::calculateHash () const {
     return sha256(hashString.str());
 }
 
-string Block :: getHash () {
+string Block :: getHash () const{
     return currHash;
 }
 
-string Block :: getInfo () {
+string Block :: getInfo () const {
     stringstream infoString;
     infoString <<
-        index << " | " <<
-        prevHash << " | " <<
-        currHash << " | " <<
-        timeStamp << " |\n" <<
-        info.bizName << " | " <<
-        info.bizType << " | " <<
-        info.certification << " | " <<
-        info.prodCode << " | " <<
-        info.prodType << " | " <<
-        info.prodPurity << " |";
+        "Block " <<
+        index << 
+        "\nPrevious Hash: " << prevHash <<
+        "\nBlock Hash: " << currHash << 
+        "\nTimestamp: " <<  timeStamp <<
+        "\nCompany: " << info.bizName <<
+        "\nIndustry: " << info.bizType <<
+        "\nCertification: " << info.certification <<
+        "\nProduct Code: " << info.prodCode <<
+        "\nProduct Type: " << info.prodType <<
+        "\nProduct Purity: " << info.prodPurity <<
+        "\nComments: " << info.comments << endl;
 
     return (infoString.str());
 }

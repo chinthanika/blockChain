@@ -1,7 +1,7 @@
 #include "Blockchain.h"
 
 Blockchain::Blockchain () {
-    data info;
+    record info;
 
     info.bizName = "NULL";
     info.bizType = "NULL";
@@ -10,15 +10,15 @@ Blockchain::Blockchain () {
     info.prodPurity = "NULL";
     info.certification = "NULL";
     info.comments = "This is the Genesis Block";
-    info.accepted = NULL;
+    info.accepted = true;
 
-    chain.emplace_back(Block (info, NULL, 0));
+    chain.emplace_back(Block (info, "0", 0));
 }
 
-void Blockchain ::addBlock (data newData) {
+void Blockchain ::addBlock (record newRecord) {
 
     Block newBlock = Block (
-        newData, 
+        newRecord, 
         getLastBlock().getHash(), 
         getLastBlock().getIndex() + 1
     );
@@ -28,4 +28,14 @@ void Blockchain ::addBlock (data newData) {
 
 Block Blockchain :: getLastBlock () const {
     return chain.back();
+}
+
+size_t Blockchain :: chainSize () const {
+    return chain.size();
+}
+
+void Blockchain :: printBlocks () {
+    for (size_t i = 1; i < chain.size(); ++i){
+        cout << chain.at(i).getInfo() << "\n\n";
+    }
 }

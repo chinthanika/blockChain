@@ -8,7 +8,7 @@
 using namespace std;
 
 //Contains relevant supply chain information
-struct data {
+struct record {
 
     string bizName;    //The name of the business receiving the product
    
@@ -20,7 +20,7 @@ struct data {
 
     string prodPurity;    //The purity of the metal
 
-    string certification;    //The quality certification of the product
+    string certification;    //The quality certification of the product received/seller company
    
     string comments;    //Any additional comments from the seller about the product
     
@@ -32,11 +32,11 @@ public:
 
     string prevHash;    //Hash of the previous block
 
-    Block(const data information, string prev, uint32_t i);    //Constructor
+    Block(const record information, string prev, uint32_t i);    //Constructor
 
-    string getHash ();    //Getter for the block's hash
+    string getHash () const;    //Getter for the block's hash
 
-    string getInfo ();   //Returns all supply block information
+    string getInfo () const;   //Returns all supply block information
 
     uint32_t getIndex ();    //Returns the index of the block
 
@@ -44,7 +44,7 @@ private:
 
     uint32_t index;    //Block number
 
-    data info;    //Relevant block information
+    record info;    //Relevant block information
 
     string currHash;    //Block hash value
 
