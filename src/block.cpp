@@ -1,19 +1,31 @@
 #include "Block.h"
 #include "sha256.h"
 #include <cstdlib>
-#include <time.h>
+#include <ctime>
 #include <sstream>
 
+//Block constructor
 Block :: Block (record information, string prev, uint32_t i) {
-    timeStamp = time(NULL);
+    
+    //Using current system time as timestamp
+    time_t currTime;
+    currTime = time(0);
+
+    timeStamp = ctime(&currTime);
+
+    //Assigning information as relevant
     info = information;
     prevHash = prev;
     index = i;
-    currHash = calculateHash ();
+
+    currHash = calculateHash ();    //Generating hash value
 }
 
-inline string Block::calculateHash () const {
+//Generating hash string
+inline string Block :: calculateHash () const {
     stringstream hashString;
+
+    //Converting all hash inputs into a string
     hashString <<
         index <<
         prevHash <<
@@ -26,15 +38,18 @@ inline string Block::calculateHash () const {
         info.prodType <<
         info.prodPurity;
 
-    return sha256(hashString.str());
+    return sha256(hashString.str());    //Hashing through sha256
 }
 
+//Returning block hash
 string Block :: getHash () const{
     return currHash;
 }
 
-string Block :: getInfo () const {
+//Returning printable string of information
+string Block :: getDetails () const {
     stringstream infoString;
+
     infoString <<
         "Block " <<
         index << 
@@ -52,6 +67,11 @@ string Block :: getInfo () const {
     return (infoString.str());
 }
 
-uint32_t Block :: getIndex () {
+//Returning block index
+uint32_t Block :: getIndex () const {
     return index;
+}
+
+record Block :: getInfo () const {
+    return info;
 }

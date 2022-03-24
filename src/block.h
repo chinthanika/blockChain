@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <iostream>
+#include <chrono>
 #include <ctime>
 
 using namespace std;
@@ -36,9 +37,11 @@ public:
 
     string getHash () const;    //Getter for the block's hash
 
-    string getInfo () const;   //Returns all supply block information
+    string getDetails () const;   //Returns all supply block information
 
-    uint32_t getIndex ();    //Returns the index of the block
+    uint32_t getIndex () const;    //Returns the index of the block
+
+    record getInfo () const;
 
 private:
 
@@ -48,7 +51,7 @@ private:
 
     string currHash;    //Block hash value
 
-    time_t timeStamp;    //Time at which the block was created
+    string timeStamp;    //Time at which the block was created
 
     string calculateHash () const;    //Hash function
 };
